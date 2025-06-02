@@ -7,11 +7,13 @@ import { NextResponse } from "next/server";
 /**
  * Handles GET requests to fetch a single blog post by ID.
  * @param {Request} request The incoming request object.
- * @param {object} params The dynamic route parameters (e.g., { id: 'postId' }).
+ * @param {object} context The context object containing dynamic route parameters.
+ * @param {object} context.params The dynamic route parameters (e.g., { id: 'postId' }).
  * @returns {NextResponse} A JSON response containing the post or an error message.
  */
-export async function GET(request, { params }) {
-  const { id } = params; // Get the ID from the URL parameters.
+export async function GET(request, context) {
+  const { params } = context; // Get the ID from the URL parameters via context.
+  const { id } = params;
 
   try {
     await dbConnect(); // Connect to the database.
@@ -37,11 +39,13 @@ export async function GET(request, { params }) {
 /**
  * Handles PUT requests to update a single blog post by ID.
  * @param {Request} request The incoming request object containing updated post data.
- * @param {object} params The dynamic route parameters (e.g., { id: 'postId' }).
+ * @param {object} context The context object containing dynamic route parameters.
+ * @param {object} context.params The dynamic route parameters (e.g., { id: 'postId' }).
  * @returns {NextResponse} A JSON response containing the updated post or an error message.
  */
-export async function PUT(request, { params }) {
-  const { id } = params; // Get the ID from the URL parameters.
+export async function PUT(request, context) {
+  const { params } = context; // Get the ID from the URL parameters via context.
+  const { id } = params;
   const body = await request.json(); // Parse the JSON body.
   const { title, content } = body;
 
@@ -87,11 +91,13 @@ export async function PUT(request, { params }) {
 /**
  * Handles DELETE requests to delete a single blog post by ID.
  * @param {Request} request The incoming request object.
- * @param {object} params The dynamic route parameters (e.g., { id: 'postId' }).
+ * @param {object} context The context object containing dynamic route parameters.
+ * @param {object} context.params The dynamic route parameters (e.g., { id: 'postId' }).
  * @returns {NextResponse} A JSON response indicating success or an error message.
  */
-export async function DELETE(request, { params }) {
-  const { id } = params; // Get the ID from the URL parameters.
+export async function DELETE(request, context) {
+  const { params } = context; // Get the ID from the URL parameters via context.
+  const { id } = params;
 
   try {
     await dbConnect(); // Connect to the database.
